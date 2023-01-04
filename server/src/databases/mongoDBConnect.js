@@ -1,24 +1,35 @@
+
 import mongoose from 'mongoose';
 import pkg from 'mongoose';
 import dotenv from 'dotenv';
 import express from 'express';
-dotenv.config()
+// Internal imports
 
-const port = process.env.PORT
 
-const {connect, connection} = pkg;
+
+dotenv.config();
+const port = process.env.PORT || 5000;
 const connectUrl = process.env.MONGO_URL;
-
+const {connect, connection} = pkg;
 const app = express();
 
 mongoose.set('strictQuery', true);
+
+
 const mongoDBConnect = () => {
-    mongoose.connect(connectUrl)
+
+    try {
+        mongoose.connect(connectUrl)
+    } catch (error) {
+        console.log(error);
+    }
+}
+export default mongoDBConnect;
+
+/*
 .then(() => app.listen(port, () => {
     console.log(`listening on port ${port}`)
     console.log(`Database connected at ${connection.host}:${connection.port}`)
 }))
 .catch((err) =>{ console.log(err.message)})
-}
-
-export default mongoDBConnect;
+*/
