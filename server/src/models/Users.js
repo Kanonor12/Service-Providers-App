@@ -13,17 +13,31 @@ const UserSchema = new mongoose.Schema(
         required: true,
         unique: true,
     },
+    image: {
+        type: String,
+    },
+    district: {
+        type: String,
+        required: true,
+    },
+    town: {
+        type: String,
+        required: true,
+    },
     password:{
          type: String,
         required: true,
     },
-    confirmPassword:{
-         type: String,
-        required: true,
-    },  
+    isAdmin: {
+        type: String,
+        default: false,
+    },
+    isServiceProvider: {
+        type: String,
+        default: false,
+    },
     },
     {timestamps: true,} 
 )
 
-const User = mongoose.model("User", UserSchema)
-export default User
+export default mongoose.model("User", UserSchema)

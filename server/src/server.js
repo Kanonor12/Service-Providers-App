@@ -8,6 +8,7 @@ import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath} from 'url';
 import pkg from 'mongoose';
+import mongoose from 'mongoose';
 // Intenal imports
 import authRoutes from './routes/authRoutes.js'
 import usersRoutes from './routes/usersRoutes.js';
@@ -54,16 +55,16 @@ app.use('/auth', authRoutes)
 app.use("/users", usersRoutes)
 app.use("/service-providers", serviceProvidersRoutes)
 
+mongoose.connection.on("disconnected", () => {
+    console.log("mongoDB disconnected!");
+  });
 
+mongoose.connection.on("connected", () => {
+    console.log("mongoDB connected!");
+  });
 app.listen(port, () => {
     console.log(`listening on port ${port}`)  
-    mongoDBConnect()
-    try {
-         console.log(`Database connected at ${Connection.hostname}:${Connection.port}`)
-    } catch (error) {
-        console.log(error.message)
-    }
-   
+    mongoDBConnect()   
 })
 
 

@@ -16,10 +16,11 @@ const app = express();
 mongoose.set('strictQuery', true);
 
 
-const mongoDBConnect = () => {
+const mongoDBConnect = async () => {
 
     try {
-        mongoose.connect(connectUrl)
+        await mongoose.connect(connectUrl)
+        console.log(`Database connected at ${connection.host}:${connection.port}`)
     } catch (error) {
         console.log(error);
     }
