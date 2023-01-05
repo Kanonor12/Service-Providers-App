@@ -1,3 +1,4 @@
+import Service from "../models/Service.js"
 
 
 export const loginUser = (req,res) => {
@@ -5,9 +6,16 @@ export const loginUser = (req,res) => {
     res.send('User authentication endpoint')
 }
 
-export const registerService = (req,res) => {
-    console.log('Service registration endpoint')
-    res.send('Service registration endpoint')
+export const registerService = async (req,res) => {
+   
+    const newService = new Service(req.body)
+
+    try {
+        const savedService = await newService.save()
+        res.status(200).json(savedService)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
 
 
