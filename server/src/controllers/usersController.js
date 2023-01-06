@@ -1,20 +1,48 @@
 
-export const getUsers = (req, res, next) => {
-    console.log("Get users")
-    res.send("Get users")
+import User from "../models/Users.js"
+
+export const getUsers = async (req, res, next) => {
+    
+    try {
+        const users = await User.find()
+        res.status(200).json(users)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const getUserById = (req, res, next) => {
-    console.log("Get user by id")
-    res.send("Get user by id")
+export const getUserById = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id)
+
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const updateUser = (req, res, next) => {
-    console.log("Update user")
-    res.send("Update user")
+export const updateUser = async (req, res, next) => {
+    try {
+        const updateUser = await User.findByIdAndUpdate(
+            req.params.id,
+            {$set: req.body},
+            {new: true}
+        )
+
+        res.status(200).json(updateUser)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const deleteUser = (req, res, next) => {
-    console.log("Delete user")
-    res.send("Delete user")
+export const deleteUser =async (req, res, next) => {
+   try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(200).json("User deleted")
+   } catch (error) {
+        console.log(error)
+   }
 }
+
+
+
