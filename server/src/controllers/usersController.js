@@ -1,21 +1,48 @@
 
+import User from "../models/Users.js"
 
-export const getServiceProviders = (req, res, next) => {
-    console.log("Get service providers")
-    res.send("Get service providers")
+export const getUsers = async (req, res, next) => {
+    
+    try {
+        const users = await User.find()
+        res.status(200).json(users)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const getServiceProviderById = (req, res, next) => {
-    console.log("Get service provider by id")
-    res.send("Get service provider by id")
+export const getUserById = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id)
+
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const updateServiceProvider = (req, res, next) => {
-    console.log("Update service provider")
-    res.send("Update service provider")
+export const updateUser = async (req, res, next) => {
+    try {
+        const updateUser = await User.findByIdAndUpdate(
+            req.params.id,
+            {$set: req.body},
+            {new: true}
+        )
+
+        res.status(200).json(updateUser)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-export const deleteServiceProvider = (req, res, next) => {
-    console.log("Delete service provider")
-    res.send("Delete service provider")
+export const deleteUser =async (req, res, next) => {
+   try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(200).json("User deleted")
+   } catch (error) {
+        console.log(error)
+   }
 }
+
+
+

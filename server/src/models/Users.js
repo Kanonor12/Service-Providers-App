@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 const UserSchema = new mongoose.Schema(
     {
      firstName: {
-        tye: String,
+        type: String,
      },
-    lasttName:{
+    lastName:{
          type: String,
     },
     email:{
@@ -18,11 +18,9 @@ const UserSchema = new mongoose.Schema(
     },
     district: {
         type: String,
-        required: true,
     },
     town: {
         type: String,
-        required: true,
     },
     password:{
          type: String,

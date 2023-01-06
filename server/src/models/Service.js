@@ -5,7 +5,7 @@ const ServiceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Category: {
+    category: {
         type: String,
         required: true
     },
@@ -36,6 +36,9 @@ const ServiceSchema = new mongoose.Schema({
     otherServices: {
         type: [String],
     },
+    unavailableDates: {
+        type: [Date]
+    }
 },  {timestamps: true,} )
 
 export default mongoose.model("Service", ServiceSchema)

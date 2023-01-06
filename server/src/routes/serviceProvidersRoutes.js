@@ -1,5 +1,6 @@
 import express from 'express';
-import { deleteServiceProvider, getServiceProviderById, getServiceProviders, updateServiceProvider } from '../controllers/usersController.js';
+import { deleteServiceProvider, getServiceProviderById, getServiceProviders, updateServiceProvider } from '../controllers/serviceProvidersControllers.js';
+
 
 const router = express.Router();
 
