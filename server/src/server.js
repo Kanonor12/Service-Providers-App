@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath} from 'url';
 import pkg from 'mongoose';
 import mongoose from 'mongoose';
+import cookieParser from "cookie-parser";
 // Intenal imports
 import authRoutes from './routes/authRoutes.js'
 import usersRoutes from './routes/usersRoutes.js';
@@ -28,6 +29,7 @@ const {connect, Connection} = pkg;
 const app = express();
 app.use(logger)
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors());
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}))

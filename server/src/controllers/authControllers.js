@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-
+import jwt from 'jsonwebtoken';
 import Service from "../models/Service.js"
 import User from "../models/Users.js"
 
@@ -14,8 +14,23 @@ export const loginUser = async (req,res, next) => {
             user.password
           );
         if (!isPasswordCorrect) return res.status(400).json("Wrong password or username")
-        console.log(user)
-        res.status(201).json(`User ${user.firstName} ${user.lastName} logged in successfully`)
+        
+        const token = jwt.sign(
+            {
+                id: user._id,
+                isAdmin: user.isAdmin
+            },
+            process.env.JWT_SECRET_KEY
+        )
+
+        const { password, isAdmin, ...otherDetails} = user._doc;
+
+        res.
+        cookie("access_token", token, {
+            httpOnly: true
+        })
+        .status(201)
+        .json({details: {...otherDetails}, isAdmin})
     } catch (error) {
         console.log(error)
         
