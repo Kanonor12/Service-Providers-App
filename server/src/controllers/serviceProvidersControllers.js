@@ -6,7 +6,7 @@ export const getServiceProviders = async (req, res, next) => {
         const services = await Service.find()
         res.status(200).json(services)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -16,7 +16,7 @@ export const getServiceProviderById = async (req, res, next) => {
 
         res.status(200).json(serviceProvider)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -30,7 +30,7 @@ export const updateServiceProvider = async (req, res, next) => {
 
         res.status(200).json(updateServiceProvider)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -39,7 +39,7 @@ export const deleteServiceProvider =async (req, res, next) => {
         await Service.findByIdAndDelete(req.params.id)
         res.status(200).json("Service Provider deleted")
    } catch (error) {
-        console.log(error)
+    next(error);
    }
 }
 
