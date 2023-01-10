@@ -7,7 +7,7 @@ export const getUsers = async (req, res, next) => {
         const users = await User.find()
         res.status(200).json(users)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -17,7 +17,7 @@ export const getUserById = async (req, res, next) => {
 
         res.status(200).json(user)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -33,7 +33,7 @@ export const updateUser = async (req, res, next) => {
 
         res.status(200).json(updateUser)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 }
 
@@ -42,7 +42,7 @@ export const deleteUser =async (req, res, next) => {
         await User.findByIdAndDelete(req.params.id)
         res.status(200).json("User deleted")
    } catch (error) {
-        console.log(error)
+    next(error);
    }
 }
 

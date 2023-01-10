@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
+import { createError } from '../utils/error.js';
 
 
 export const verifyToken = (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
-      return next(res.status(401).json("You are not authenticated!"));
+      return next(createError(401,"You are not authenticated!"));
     }
    console.log(token);
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
@@ -19,7 +20,7 @@ export const verifyUser = (req, res, next) => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
-      return next(res.status(403).json("You are not authorised for this operation!"));
+      return next(createError(403,"You are not authorised for this operation!"));
     }
   });
 };
@@ -29,7 +30,7 @@ export const verifyAdmin = (req, res, next) => {
     if (req.user.isAdmin) {
       next();
     } else {
-      return next(res.status(403).json("You are not authorized for this operation"));
+      return next(createError(403,"You are not authorized for this operation"));
     }
   });
 };
@@ -39,7 +40,7 @@ export const verifyServiceProvider = (req, res, next) => {
     if (req.user.isServiceProvider || req.user.isAdmin) {
       next();
     } else {
-      return next(res.status(403).json("You are not authorized for this operation"));
+      return next(createError(403,"You are not authorized for this operation"));
     }
   });
 };

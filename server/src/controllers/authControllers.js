@@ -2,18 +2,19 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Service from "../models/Service.js"
 import User from "../models/Users.js"
+import { createError } from '../utils/error.js';
 
 
 export const loginUser = async (req,res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email})
-        if (!user) return res.status(404).json("User not found")
+        if (!user) return next(createError(404, "User not found"))
 
         const isPasswordCorrect = await bcrypt.compare(
             req.body.password,
             user.password
           );
-        if (!isPasswordCorrect) return res.status(400).json("Wrong password or username")
+        if (!isPasswordCorrect) return next(createError(404,"Wrong password or username"))
         
         const token = jwt.sign(
             {
@@ -32,7 +33,7 @@ export const loginUser = async (req,res, next) => {
         .status(201)
         .json({details: {...otherDetails}, isAdmin})
     } catch (error) {
-        console.log(error)
+        next(error);
         
     }
 }
@@ -45,7 +46,7 @@ export const registerService = async (req,res, next) => {
         const savedService = await newService.save()
         res.status(200).json(savedService)
     } catch (error) {
-        res.status(500).json(error)
+        next(error);
     }
 }
 
@@ -62,6 +63,6 @@ export const registerUser =async (req,res, next) => {
         const savedUser = await newUser.save()
         res.status(200).send(savedUser)
     } catch (error) {
-        res.status(500).send(error)
+        next(error);
     }
 }
