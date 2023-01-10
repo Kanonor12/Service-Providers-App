@@ -33,3 +33,13 @@ export const verifyAdmin = (req, res, next) => {
     }
   });
 };
+
+export const verifyServiceProvider = (req, res, next) => {
+  verifyToken(req, res, next, () => {
+    if (req.user.isServiceProvider || req.user.isAdmin) {
+      next();
+    } else {
+      return next(res.status(403).json("You are not authorized for this operation"));
+    }
+  });
+};
