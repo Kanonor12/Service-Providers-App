@@ -1,50 +1,47 @@
 import bcrypt from 'bcrypt';
-import User from "../models/Users.js"
+import User from '../models/Users.js';
 
 export const getUsers = async (req, res, next) => {
-    
-    try {
-        const users = await User.find()
-        res.status(200).json(users)
-    } catch (error) {
-        next(error);
-    }
-}
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const getUserById = async (req, res, next) => {
-    try {
-        const user = await User.findById(req.params.id)
+  try {
+    const user = await User.findById(req.params.id);
 
-        res.status(200).json(user)
-    } catch (error) {
-        next(error);
-    }
-}
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const updateUser = async (req, res, next) => {
-    try {
-        const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(req.body.password, salt);
-        const updateUser = await User.findByIdAndUpdate(
-            req.params.id,
-            {$set: {...req.body, password: hash}},
-            {new: true}
-        )
+  try {
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: { ...req.body, password: hash } },
+      { new: true },
+    );
 
-        res.status(200).json(updateUser)
-    } catch (error) {
-        next(error);
-    }
-}
-
-export const deleteUser =async (req, res, next) => {
-   try {
-        await User.findByIdAndDelete(req.params.id)
-        res.status(200).json("User deleted")
-   } catch (error) {
+    res.status(200).json(updatedUser);
+  } catch (error) {
     next(error);
-   }
-}
+  }
+};
 
-
+export const deleteUser = async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json('User deleted');
+  } catch (error) {
+    next(error);
+  }
+};
 

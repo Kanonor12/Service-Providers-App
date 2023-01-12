@@ -4,10 +4,9 @@ import { verifyAdmin, verifyToken, verifyServiceProvider, verifyUser } from '../
 
 const router = express.Router();
 
-
-router.get("/", getServiceProviders)
-router.get("/:id", getServiceProviderById)
-router.put("/:id", verifyServiceProvider, updateServiceProvider)
-router.delete("/:id", verifyServiceProvider, deleteServiceProvider)
+router.get('/', getServiceProviders);
+router.get('/:id', getServiceProviderById);
+router.put('/:id', verifyServiceProvider, updateServiceProvider);
+router.delete('/:id', verifyServiceProvider, deleteServiceProvider);
 
 export default router;
