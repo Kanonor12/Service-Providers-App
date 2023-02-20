@@ -20,6 +20,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
+    'no-unused-vars': 'warn',
     'linebreak-style': 0,
     'react/state-in-constructor': 0,
     'import/prefer-default-export': 0,
