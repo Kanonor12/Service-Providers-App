@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import profile from '../assets/profile.jpeg'
+import profile from '../assets/profile.jpeg';
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
@@ -19,9 +19,9 @@ const Navbar = () => {
 
   const currentUser = {
     id: 1,
-    username: 'John Doe',
+    username: 'Kanono Ramashamole',
     isServiceProvider: true,
-    imgUrl: profile
+    imgUrl: profile,
   };
 
   return (
@@ -39,22 +39,24 @@ const Navbar = () => {
           {!currentUser && <span>Sign in</span>}
           {!currentUser?.isServiceProvider && <span>List your Service</span>}
           {!currentUser && <button type="button" className={`p-2 ${active ? 'border-gray-500' : 'border-white'}  border-2 rounded bg-transparent hover:bg-blue-600`}>Join</button>}
-          {currentUser &&(
-            <div className='relative flex items-center gap-2.5 cursor-pointer' onClick={() => setOpen(!open)}>
-              <Image src={currentUser.imgUrl} alt="profile" className='w-8 h-8 rounded-full object-cover' />
+          {currentUser && (
+            <div className="relative flex items-center gap-2.5 cursor-pointer" onClick={() => setOpen(!open)}>
+              <Image src={currentUser.imgUrl} alt="profile" className="w-8 h-8 rounded-full object-cover" />
               <span>{currentUser.username}</span>
-              {open && (<div className='absolute top-12 border-gray-500 rounded-xl border-2 p-5 flex flex-col gap-3 bg-white text-gray-500 font-light min-w-max'>
+              {open && (
+              <div className="absolute top-12 border-gray-500 rounded-xl border-2 p-5 flex flex-col gap-3 bg-white text-gray-500 font-light min-w-max">
                 {currentUser?.isServiceProvider && (
-                    <>
-                    <span>My Services</span>
-                    <span>Add New Service</span>
-                    </>
+                <>
+                  <span>My Services</span>
+                  <span>Add New Service</span>
+                </>
                 )}
                 <span>Orders</span>
                 <span>Messages</span>
-                <span>Logout</span>            
-             </div>)}
-            </div>,
+                <span>Logout</span>
+              </div>
+              )}
+            </div>
           )}
         </div>
       </div>

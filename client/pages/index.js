@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Navbar } from '../components';
+import { HeroSection, Navbar } from '../components';
 
 const Home = () => (
   <>
@@ -11,6 +11,7 @@ const Home = () => (
     </Head>
     <main>
       <Navbar />
+      <HeroSection />
 
     </main>
   </>
