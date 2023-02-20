@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const currentUser = {
     id: 1,
-    username: 'John Doe',
+    username: 'Kanono Ramashamole',
     isServiceProvider: true,
     imgUrl: profile,
   };
