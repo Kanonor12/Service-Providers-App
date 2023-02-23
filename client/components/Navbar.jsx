@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`${active ? 'bg-white text-gray-600' : 'bg-blue-800 text-white'} sticky top-0 flex flex-col`}>
+    <div className={`${active ? 'bg-white text-gray-600' : 'bg-purple-600 text-white'} sticky top-0 flex flex-col`}>
       <div className="container mx-auto flex justify-between items-center px-0 py-5">
         <div className="text-3xl font-bold">
           <span className="">ServiceHub</span>

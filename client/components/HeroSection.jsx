@@ -4,11 +4,11 @@ import service from '../assets/electrical.png';
 import search from '../assets/search.png';
 
 const HeroSection = () => (
-  <div className="bg-blue-800">
+  <div className="bg-gradient-to-b from-purple-600 to-blue-300">
     <div className="container mx-auto h-[600px] flex justify-between items-center">
       <div className="flex flex-col gap-8">
         <h1 className="text-5xl text-white font-medium">
-          Find the perfect <i className="font-light text-green-500">service providers</i> for your needs
+          Find the perfect <i className="font-light text-green-800">service providers</i> for your needs
         </h1>
         <div className="flex items-center justify-between bg-white rounded-md">
           <div className="flex items-center gap-3">
